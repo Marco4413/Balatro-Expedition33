@@ -1,0 +1,18 @@
+{
+  "id": "Expedition33",
+  "name": "Expedition 33",
+  "author": [ "Elenith04", "Marco4413" ],
+  "description": "Adds jokers inspired by `Clair Obscur: Expedition 33` characters.",
+  "prefix": "exp33",
+  "main_file": "src/main.lua",
+  "config_file": "src/config.lua",
+  "badge_colour": "030300",
+  "badge_text_colour": "ECCFA3",
+  "display_name": "Exp33",
+  "icon_path": "modicon.png",
+  "version": "1.0.0~alpha0",
+  "dependencies": [
+    "Steamodded (==1.*~)",
+    "Balatro (==1.0.1~)"
+  ]
+}

@@ -1,0 +1,76 @@
+local MOD = SMODS.current_mod
+function MOD.log_debug(...)
+  if not MOD.config.debug then return; end
+
+  local values = {...}
+  for i=1, #values do
+    values[i] = tostring(values[i])
+  end
+
+  sendDebugMessage(table.concat(values), MOD.id)
+end
+
+MOD.config_tab = function ()
+  return {n=G.UIT.ROOT, config={align = "cm", r = 0.1, padding = 0.5, colour = G.C.BLACK}, nodes={
+    {n=G.UIT.R, config={align = "tm"}, nodes={
+      create_toggle{ label="Debug", ref_table=MOD.config, ref_value="debug", callback=function (value)
+        MOD.log_debug("debug: ", value)
+      end }
+    }}
+  }}
+end
+
+-- fallback to the old method of adding icons
+if not SMODS.get_atlas("exp33_modicon") then
+  SMODS.Atlas {
+    key  = "modicon",
+    path = "modicon.png",
+    px = 128, py = 128,
+  }
+end
+
+assert(SMODS.load_file("src/jokers/gustave.lua"))()
+assert(SMODS.load_file("src/jokers/lune.lua"))()
+assert(SMODS.load_file("src/jokers/monoco.lua"))()
+assert(SMODS.load_file("src/jokers/verso.lua"))()
+
+if MOD.config.debug then
+  MOD.log_debug("debug mode active")
+
+  for atlas_key in next, SMODS.Atlases do
+    if atlas_key:find("^exp33") then
+      MOD.log_debug("found atlas: ", atlas_key)
+    end
+  end
+end
+
+local g_start_run = G.start_run
+function G.start_run(...)
+  g_start_run(...)
+
+  if MOD.config.debug then
+    if #G.jokers.cards <= 0 then
+      MOD.log_debug("spawning jokers")
+      SMODS.add_card {
+        set  = "Joker",
+        area = G.jokers,
+        key  = "j_exp33_gustave",
+      }
+      SMODS.add_card {
+        set  = "Joker",
+        area = G.jokers,
+        key  = "j_exp33_lune",
+      }
+      SMODS.add_card {
+        set  = "Joker",
+        area = G.jokers,
+        key  = "j_exp33_monoco",
+      }
+      SMODS.add_card {
+        set  = "Joker",
+        area = G.jokers,
+        key  = "j_exp33_verso",
+      }
+    end
+  end
+end
