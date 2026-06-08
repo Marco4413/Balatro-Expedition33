@@ -4,22 +4,22 @@ return {
       j_exp33_lune = {
         name = "Elemental Stains",
         text = {
-          "Each Stain gives additional",
-          "Chips to a scoring card and",
-          "is acquired by playing a",
-          "specific Suit.",
+          "Stains are acquired by playing",
+          "scoring cards. Each Stain",
+          "corresponds to a Suit. If a",
+          "scoring card and a Stain have",
+          "the same Suit, Chips are boosted",
+          "for that card. {V:9}#13#{} Stain is",
+          "created by playing any scoring",
+          "card while {V:2}#2#{}, {V:4}#5#{}, {V:6}#8#{}",
+          "and {V:8}#11#{} Stains are active.",
+          "{V:9}#13#{} Stain boosts all Suits.",
 
-          "{V:1}#1#{} - {V:2}#2#{} ({X:chips,C:white} +X#3# {} Chips)",
-          "{V:3}#4#{} - {V:4}#5#{} ({X:chips,C:white} +X#6# {} Chips)",
-          "{V:5}#7#{} - {V:6}#8#{} ({X:chips,C:white} +X#9# {} Chips)",
-          "{V:7}#10#{} - {V:8}#11#{} ({X:chips,C:white} +X#12# {} Chips)",
-
-          "Once any card is played",
-          "with {V:2}#2#{}, {V:4}#5#{}, {V:6}#8#{}",
-          "and {V:8}#11#{} Stains a",
-          "{V:9}#13#{} Stain is acquired",
-          "which gives {X:chips,C:white} +X#14# {} to all",
-          "Suits."
+          "{V:1}#1#{} - {V:2}#2#{} {X:chips,C:white} +X#3# {} Chips",
+          "{V:3}#4#{} - {V:4}#5#{} {X:chips,C:white} +X#6# {} Chips",
+          "{V:5}#7#{} - {V:6}#8#{} {X:chips,C:white} +X#9# {} Chips",
+          "{V:7}#10#{} - {V:8}#11#{} {X:chips,C:white} +X#12# {} Chips",
+          "{V:9}#13#{} {X:chips,C:white} +X#14# {} Chips"
         }
       },
       j_exp33_gustave = {
