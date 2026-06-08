@@ -1,3 +1,25 @@
+# LICENSES
+
+- [Assets](#assets)
+- [Source Code](#source-code)
+
+# Assets
+
+Files in the [`assets`](./assets/) folder are under the following license:
+
+Balatro Expedition 33 (c) 2026 by [Elenith04](https://www.nexusmods.com/profile/Elenith04)
+is licensed under CC BY-NC-SA 4.0. To view a copy of this license,
+visit [https://creativecommons.org/licenses/by-nc-sa/4.0/](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+You may ask to get a copy of the assets licensed under a different license
+by contacting the author.
+
+You can find the full text [here](./assets/LICENSE.txt).
+
+# Source Code
+
+Files **not** in the [`assets`](./assets/) folder are under the following license:
+
 Copyright (c) 2026 [Marco4413](https://github.com/Marco4413/Balatro_Expedition33)
 
 Permission is hereby granted, free of charge, to any person
