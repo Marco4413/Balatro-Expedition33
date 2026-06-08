@@ -15,8 +15,6 @@
 
 local LUNE_MAX_STAINS = 4
 
-local LUNE_STAIN_BLANK_SPRITE_POS = { x = 1, y = 0 }
-
 ---@type table<LuneStainId, LuneStain>
 local LUNE_STAIN_ = {
   ["ice"] = {
@@ -158,7 +156,7 @@ local SHARED_STAIN_SPRITE
 ---@return Sprite
 local function get_or_create_shared_stain_sprite()
   if SHARED_STAIN_SPRITE then return SHARED_STAIN_SPRITE; end
-  SHARED_STAIN_SPRITE = SMODS.create_sprite(0, 0, 0, 0, "exp33_j_lune", LUNE_STAIN_BLANK_SPRITE_POS)
+  SHARED_STAIN_SPRITE = SMODS.create_sprite(0, 0, 0, 0, "exp33_j_lune", { x = 1, y = 0 })
   return SHARED_STAIN_SPRITE
 end
 
@@ -232,15 +230,12 @@ end
           local display_stain = LUNE_STAIN_[display_stain_id]
           local stain_sprite_direction = stain_sprite_directions[i]
           shared_stain_sprite:set_sprite_pos(display_stain.sprite_pos[stain_sprite_direction])
-        else
-          shared_stain_sprite:set_sprite_pos(LUNE_STAIN_BLANK_SPRITE_POS)
+          shared_stain_sprite:draw_shader(
+              "dissolve",
+              nil, shared_stain_sprite.ARGS.send_to_shader, nil,
+              card.children.center
+            )
         end
-
-        shared_stain_sprite:draw_shader(
-            "dissolve",
-            nil, shared_stain_sprite.ARGS.send_to_shader, nil,
-            card.children.center
-          )
       end
     end
   end,
