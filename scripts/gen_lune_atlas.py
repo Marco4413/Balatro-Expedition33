@@ -10,10 +10,10 @@ P_ATLAS  = ROOT_DIR / "assets" / "1x" / "jokers" / "lune.png"
 STAINS_COUNT: int = 5
 
 SLOTS: tuple[tuple[int, int], ...] = (
-    (21, 47),
-    (35, 33),
-    (49, 47),
-    (35, 61)
+    (20, 47),
+    (35, 32),
+    (50, 47),
+    (35, 62)
 )
 
 with Image.open(P_JOKER) as joker, Image.open(P_STAINS) as stains:
