@@ -51,7 +51,7 @@ return {
           "to see which Mask boosts",
           "each hand.",
 
-          "Wheel spins by the value",
+          "Wheel spins by the rank",
           "of the left-most scoring",
           "card {C:attention}after{} the Mask was",
           "applied. Mask sequence:",
