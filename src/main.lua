@@ -32,6 +32,7 @@ end
 assert(SMODS.load_file("src/jokers/gustave.lua"))()
 assert(SMODS.load_file("src/jokers/lune.lua"))()
 assert(SMODS.load_file("src/jokers/monoco.lua"))()
+assert(SMODS.load_file("src/jokers/sciel.lua"))()
 assert(SMODS.load_file("src/jokers/verso.lua"))()
 
 if MOD.config.debug then
@@ -50,27 +51,23 @@ function G.start_run(...)
 
   if MOD.config.debug then
     if #G.jokers.cards <= 0 then
+      local joker_keys = {
+        "j_exp33_gustave",
+        "j_exp33_lune",
+        "j_exp33_monoco",
+        "j_exp33_sciel",
+        "j_exp33_verso",
+      }
+
       MOD.log_debug("spawning jokers")
-      SMODS.add_card {
-        set  = "Joker",
-        area = G.jokers,
-        key  = "j_exp33_gustave",
-      }
-      SMODS.add_card {
-        set  = "Joker",
-        area = G.jokers,
-        key  = "j_exp33_lune",
-      }
-      SMODS.add_card {
-        set  = "Joker",
-        area = G.jokers,
-        key  = "j_exp33_monoco",
-      }
-      SMODS.add_card {
-        set  = "Joker",
-        area = G.jokers,
-        key  = "j_exp33_verso",
-      }
+      for i=1, #joker_keys do
+        SMODS.add_card {
+          no_edition = true,
+          set  = "Joker",
+          area = G.jokers,
+          key  = joker_keys[i],
+        }
+      end
     end
   end
 end

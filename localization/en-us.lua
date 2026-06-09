@@ -61,6 +61,36 @@ return {
           "{C:inactive}(Current Mask: {V:6}#6#{}{C:inactive}){}"
         }
       },
+      j_exp33_sciel = {
+        name = "Sun and Moon",
+        text = {
+          "Creates {V:1}#1#{} and {V:5}#5#{} Charges",
+          "for each played scoring card",
+          "with {C:attention}light{} and {C:attention}dark{} Suits",
+          "respectively. If both {V:1}#1#{}",
+          "and {V:5}#5#{} Charges are active at",
+          "the start of the turn, they",
+          "are consumed and {V:9}#9#{}",
+          "begins, lasting #11# turns.",
+          "{V:9}#9#{} gives {X:mult,C:white} +X#10# {} Mult for",
+          "each consumed Charge. You",
+          "cannot create Charges while",
+          "in {V:9}#9#{} and they go",
+          "back to zero when it ends.",
+          "The Joker resets at the end",
+          "of the Blind.",
+
+          "{V:2}#2#{} and {V:3}#3#{} - {V:1}#1#{} {X:mult,C:white}",
+          "{V:6}#6#{} and {V:7}#7#{} - {V:5}#5#{} {X:mult,C:white}",
+
+          "Current {V:10}#9#{} Mult: {X:mult,C:white} X#13# {}",
+
+          "{C:inactive}(Sun Charges: {V:4}#4#{C:inactive}){}",
+          "{C:inactive}(Moon Charges: {V:8}#8#{C:inactive}){}",
+
+          "{C:inactive}(Twilight Remaining: {V:10}#12#{C:inactive}){}"
+        }
+      },
       j_exp33_verso = {
         name = "Perfection",
         text = {
@@ -103,6 +133,12 @@ return {
       exp33_monoco_mask_balanced = "Balanced",
       exp33_monoco_mask_heavy    = "Heavy",
 
+      exp33_sciel_reset = "Reset",
+      exp33_sciel_twilight_started = "Twilight",
+      exp33_sciel_twilight         = "Twilight",
+      exp33_sciel_charge_sun  = "Sun",
+      exp33_sciel_charge_moon = "Moon",
+
       exp33_verso_perfection_reset = "Perfection Reset",
       exp33_verso_rank_up   = "Rank Up",
       exp33_verso_rank_down = "Rank Down",
@@ -116,6 +152,7 @@ return {
       exp33_lune_got_stain = "+1 #1# Stain",
       exp33_gustave_charge_increase = "+#1# Charge",
       exp33_monoco_wheel_spin = "#1# Spins",
+      exp33_sciel_charge_increase = "+#1# #2# Charge",
       exp33_verso_perfection_up   = "+#1# Perfection",
       exp33_verso_perfection_down = "-#1# Perfection"
     }
