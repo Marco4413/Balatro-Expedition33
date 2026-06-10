@@ -14,6 +14,8 @@ return {
           "card while {V:2}#2#{}, {V:4}#5#{}, {V:6}#8#{}",
           "and {V:8}#11#{} Stains are active.",
           "{V:9}#13#{} Stain boosts all Suits.",
+          "Stains are reset at the end of the",
+          "round.",
 
           "{V:1}#1#{} - {V:2}#2#{} {X:chips,C:white} +X#3# {} Chips",
           "{V:3}#4#{} - {V:4}#5#{} {X:chips,C:white} +X#6# {} Chips",
@@ -115,6 +117,7 @@ return {
   },
   misc = {
     dictionary = {
+      exp33_lune_stain_reset = "Reset",
       exp33_lune_stain_ice       = "Ice",
       exp33_lune_stain_fire      = "Fire",
       exp33_lune_stain_lightning = "Lightning",

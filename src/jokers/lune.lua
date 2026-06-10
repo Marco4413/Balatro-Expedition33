@@ -209,6 +209,10 @@ end
   end,
 
   calculate = function (self, card, context)
+    if context.blind_defeated then
+      return self:calculate_reset_stains(card)
+    end
+
     if context.individual and context.cardarea == G.play then
       return self:calculate_stain(card, context.other_card.base.suit)
     end
@@ -238,6 +242,27 @@ end
         end
       end
     end
+  end,
+
+  ---@param self SMODS.Joker
+  ---@param card Card
+  ---@return table calc
+  calculate_reset_stains = function (self, card)
+    card.ability.extra.stains = {}
+    return {
+      func = function ()
+        G.E_MANAGER:add_event(Event{
+          func = function ()
+            card.ability.extra.display_stains = {}
+            card:flip()
+            card:flip()
+            return true
+          end
+        })
+      end,
+      message = localize("exp33_lune_stain_reset"),
+      effect  = true,
+    }
   end,
 
   ---@param self SMODS.Joker
