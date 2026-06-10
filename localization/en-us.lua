@@ -124,7 +124,7 @@ return {
       exp33_lune_stain_earth     = "Earth",
       exp33_lune_stain_light     = "Light",
 
-      exp33_gustave_charge_reset = "Charges Reset",
+      exp33_gustave_charge_reset = "Reset",
       exp33_gustave_damage_low     = "Low",
       exp33_gustave_damage_medium  = "Medium",
       exp33_gustave_damage_high    = "High",
@@ -142,7 +142,7 @@ return {
       exp33_sciel_charge_sun  = "Sun",
       exp33_sciel_charge_moon = "Moon",
 
-      exp33_verso_perfection_reset = "Perfection Reset",
+      exp33_verso_perfection_reset = "Reset",
       exp33_verso_rank_up   = "Rank Up",
       exp33_verso_rank_down = "Rank Down",
       exp33_verso_rank_d = "D",
