@@ -45,29 +45,29 @@ if MOD.config.debug then
   end
 end
 
-local g_start_run = G.start_run
-function G.start_run(...)
-  g_start_run(...)
+local game_start_run = Game.start_run
+function Game:start_run(args, ...)
+  local is_starting_new_run = (args or {}).savetext == nil
+  game_start_run(self, args, ...)
 
+  if not is_starting_new_run then return; end
   if MOD.config.debug then
-    if #G.jokers.cards <= 0 then
-      local joker_keys = {
-        "j_exp33_gustave",
-        "j_exp33_lune",
-        "j_exp33_monoco",
-        "j_exp33_sciel",
-        "j_exp33_verso",
-      }
+    local joker_keys = {
+      "j_exp33_gustave",
+      "j_exp33_lune",
+      "j_exp33_monoco",
+      "j_exp33_sciel",
+      "j_exp33_verso",
+    }
 
-      MOD.log_debug("spawning jokers")
-      for i=1, #joker_keys do
-        SMODS.add_card {
-          no_edition = true,
-          set  = "Joker",
-          area = G.jokers,
-          key  = joker_keys[i],
-        }
-      end
+    MOD.log_debug("spawning jokers")
+    for i=1, #joker_keys do
+      SMODS.add_card {
+        no_edition = true,
+        set  = "Joker",
+        area = G.jokers,
+        key  = joker_keys[i],
+      }
     end
   end
 end
