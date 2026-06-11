@@ -1,0 +1,2 @@
+These scripts must be ran as Python modules because they borrow
+code from each other. From the root directory run `python -m scripts.<name>`.

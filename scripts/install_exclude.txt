@@ -1,6 +1,0 @@
-\.lsp\
-\.vscode\
-
-\build\
-\game_source\
-\scripts\
