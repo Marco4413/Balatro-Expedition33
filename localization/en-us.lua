@@ -1,29 +1,6 @@
 return {
   descriptions = {
     Joker = {
-      j_exp33_lune = {
-        name = "Elemental Stains",
-        text = {
-          "Stains are acquired by playing",
-          "scoring cards. Each Stain",
-          "corresponds to a Suit. If a",
-          "scoring card and a Stain have",
-          "the same Suit, Chips are boosted",
-          "for that card. {V:9}#13#{} Stain is",
-          "created by playing any scoring",
-          "card while {V:2}#2#{}, {V:4}#5#{}, {V:6}#8#{}",
-          "and {V:8}#11#{} Stains are active.",
-          "{V:9}#13#{} Stain boosts all Suits.",
-          "Stains are {C:attention}reset{} at the end of the",
-          "round.",
-
-          "{V:1}#1#{} - {V:2}#2#{} {X:chips,C:white} +X#3# {} Chips",
-          "{V:3}#4#{} - {V:4}#5#{} {X:chips,C:white} +X#6# {} Chips",
-          "{V:5}#7#{} - {V:6}#8#{} {X:chips,C:white} +X#9# {} Chips",
-          "{V:7}#10#{} - {V:8}#11#{} {X:chips,C:white} +X#12# {} Chips",
-          "{V:9}#13#{} {X:chips,C:white} +X#14# {} Chips"
-        }
-      },
       j_exp33_gustave = {
         name = "Overcharge",
         text = {
@@ -42,8 +19,31 @@ return {
           "{C:inactive}(Current Mult: {X:mult,C:white} X#19# {C:inactive}){}"
         }
       },
+      j_exp33_lune = {
+        name = "Elemental Stains",
+        text = {
+          "Stains are acquired by playing",
+          "scoring cards. Each Stain",
+          "corresponds to a Suit. If a",
+          "scoring card and a Stain have",
+          "the same Suit, the card's Chips",
+          "are boosted. {V:9}#13#{} Stain is",
+          "created by playing any scoring",
+          "card while {V:2}#2#{}, {V:4}#5#{}, {V:6}#8#{}",
+          "and {V:8}#11#{} Stains are active.",
+          "{V:9}#13#{} Stain boosts all Suits.",
+          "Stains are {C:attention}reset{} at the end of the",
+          "round.",
+
+          "{V:1}#1#{} - {V:2}#2#{} {X:chips,C:white} +X#3# {} Chips",
+          "{V:3}#4#{} - {V:4}#5#{} {X:chips,C:white} +X#6# {} Chips",
+          "{V:5}#7#{} - {V:6}#8#{} {X:chips,C:white} +X#9# {} Chips",
+          "{V:7}#10#{} - {V:8}#11#{} {X:chips,C:white} +X#12# {} Chips",
+          "{V:9}#13#{} {X:chips,C:white} +X#14# {} Chips"
+        }
+      },
       j_exp33_maelle = {
-        name = "Combat Stance",
+        name = "Battle Stance",
         text = {
           "The Joker begins in",
           "{V:1}#1#{} mode. Stances",
@@ -60,9 +60,9 @@ return {
           "of the blind.",
 
           "Stances:",
-          "{V:2}#2#{} - {X:chips,C:white} X#3# {} Chips",
-          "{V:3}#4#{} - {X:mult,C:white} X#5# {} Mult, {V:4}#6#$#7#{} on {C:attention}discard{}",
-          "{V:5}#8#{} - {X:mult,C:white} X#9# {} Mult",
+          "{V:2}#2#{} {X:chips,C:white} X#3# {} Chips",
+          "{V:3}#4#{} {X:mult,C:white} X#5# {} Mult, {V:4}#6#$#7#{} on {C:attention}discard{}",
+          "{V:5}#8#{} {X:mult,C:white} X#9# {} Mult",
 
           "{C:inactive}(Current Stance: {V:6}#10#{C:inactive}){}"
         }
@@ -157,32 +157,32 @@ return {
   misc = {
     -- https://www.reddit.com/r/expedition33/comments/1nek3i4/the_list_of_all_the_battle_voice_lines/
     quips = {
-      exp33_gustave_loss = { "For those who come after." },
-      exp33_gustave_win  = { "The Expedition continues." },
-      exp33_lune_loss = { "When one falls, we continue." },
-      exp33_lune_win  = { "The journey is far from over." },
-      exp33_maelle_loss = { "Not looking good." },
-      exp33_maelle_win  = { "For a brighter future." },
-      exp33_monoco_loss = { "Ugh, slow as Verso." },
-      exp33_monoco_win  = { "What a lovely fight." },
-      exp33_sciel_loss = { "Death is a friend." },
-      exp33_sciel_win  = { "It was written in the stars." },
-      exp33_verso_loss = { "I'll always come back." },
-      exp33_verso_win  = { "One more day, one more battle won." }
+      exp33_gustave_loss = { "For those who come after." }, -- 01_Overcharge4_Gustave
+      exp33_gustave_win  = { "The Expedition continues." }, -- 03_BattleWon_Gustave
+      exp33_lune_loss = { "When one falls, we continue." }, -- ST_CS_1_3_06_LuneArrives, 10_Lune
+      exp33_lune_win  = { "The journey is far from over." }, -- 10_BattleWon_Lune
+      exp33_maelle_loss = { "Not looking good." }, -- 07_TurnStartLowLife_Maelle
+      exp33_maelle_win  = { "For a brighter future." }, -- 07_BattleWon_Maelle
+      exp33_monoco_loss = { "Ugh, slow as Verso." }, -- 04_FailsAQTE_Monoco
+      exp33_monoco_win  = { "What a lovely fight." }, -- 01_BattleWon_Monoco
+      exp33_sciel_loss = { "Death is a friend." }, -- 04_Skill_Deathisafriend_Sciel
+      exp33_sciel_win  = { "It was written in the stars." }, -- 10_BattleWon_Sciel
+      exp33_verso_loss = { "I'll always come back." }, -- 64_Skill_Illalwayscomeback_Verso
+      exp33_verso_win  = { "One more day, one more battle won." } -- 04_BattleWon_Verso
     },
     dictionary = {
+      exp33_gustave_charge_reset = "Reset",
+      exp33_gustave_damage_low     = "Low",
+      exp33_gustave_damage_medium  = "Medium",
+      exp33_gustave_damage_high    = "High",
+      exp33_gustave_damage_extreme = "Extreme",
+
       exp33_lune_stain_reset = "Reset",
       exp33_lune_stain_ice       = "Ice",
       exp33_lune_stain_fire      = "Fire",
       exp33_lune_stain_lightning = "Lightning",
       exp33_lune_stain_earth     = "Earth",
       exp33_lune_stain_light     = "Light",
-
-      exp33_gustave_charge_reset = "Reset",
-      exp33_gustave_damage_low     = "Low",
-      exp33_gustave_damage_medium  = "Medium",
-      exp33_gustave_damage_high    = "High",
-      exp33_gustave_damage_extreme = "Extreme",
 
       exp33_maelle_stance_reset = "Reset",
       exp33_maelle_stance_stanceless = "Stanceless",
@@ -214,8 +214,8 @@ return {
       exp33_ui_config_enable_quips = "Enable Quips"
     },
     v_dictionary = {
-      exp33_lune_got_stain = "+1 #1# Stain",
       exp33_gustave_charge_increase = "+#1# Charge",
+      exp33_lune_got_stain = "+1 #1# Stain",
       exp33_monoco_wheel_spin = "#1# Spins",
       exp33_sciel_charge_increase = "+#1# #2# Charge",
       exp33_verso_perfection_up   = "+#1# Perfection",
