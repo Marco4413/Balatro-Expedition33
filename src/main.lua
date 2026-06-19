@@ -1,6 +1,8 @@
 local MOD = SMODS.current_mod
-function MOD.log_debug(...)
-  if not MOD.config.debug then return; end
+MOD.DEBUG = { enabled = false }
+
+function MOD.DEBUG.log(...)
+  if not MOD.DEBUG.enabled then return; end
 
   local values = {...}
   for i=1, #values do
@@ -13,7 +15,6 @@ end
 MOD.config_tab = function ()
   return {n=G.UIT.ROOT, config={align = "cm", r = 0.1, padding = 0.5, colour = G.C.BLACK}, nodes={
     {n=G.UIT.R, config={align = "tm"}, nodes={
-      create_toggle{label="Debug", ref_table=MOD.config, ref_value="debug"},
       create_toggle{label=localize("exp33_ui_config_enable_quips"), ref_table=MOD.config, ref_value="enable_quips"},
     }}
   }}
@@ -35,12 +36,12 @@ assert(SMODS.load_file("src/jokers/monoco.lua"))()
 assert(SMODS.load_file("src/jokers/sciel.lua"))()
 assert(SMODS.load_file("src/jokers/verso.lua"))()
 
-if MOD.config.debug then
-  MOD.log_debug("debug mode active")
+if MOD.DEBUG.enabled then
+  MOD.DEBUG.log("debug mode active")
 
   for atlas_key in next, SMODS.Atlases do
     if atlas_key:find("^exp33") then
-      MOD.log_debug("found atlas: ", atlas_key)
+      MOD.DEBUG.log("found atlas: ", atlas_key)
     end
   end
 end
@@ -51,7 +52,7 @@ function Game:start_run(args, ...)
   game_start_run(self, args, ...)
 
   if not is_starting_new_run then return; end
-  if MOD.config.debug then
+  if MOD.DEBUG.enabled then
     local joker_keys = {
       "j_exp33_gustave",
       "j_exp33_lune",
@@ -61,7 +62,7 @@ function Game:start_run(args, ...)
       "j_exp33_verso",
     }
 
-    MOD.log_debug("spawning jokers")
+    MOD.DEBUG.log("spawning jokers")
     for i=1, #joker_keys do
       SMODS.add_card {
         no_edition = true,
