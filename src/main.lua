@@ -12,6 +12,27 @@ function MOD.DEBUG.log(...)
   sendDebugMessage(table.concat(values), MOD.id)
 end
 
+MOD.ui_config = { author_colour = MOD.badge_text_colour }
+MOD.description_loc_vars = function (self)
+  local loc = {
+    vars = {
+      colours = {
+        MOD.ui_config.author_colour,
+        MOD.badge_text_colour,
+      },
+    },
+    scale = 1.25,
+    text_colour       = G.C.UI.TEXT_LIGHT,
+    background_colour = G.C.CLEAR,
+  }
+
+  for i=1, #MOD.author do
+    table.insert(loc.vars, MOD.author[i])
+  end
+
+  return loc
+end
+
 MOD.config_tab = function ()
   return {n=G.UIT.ROOT, config={align = "cm", r = 0.1, padding = 0.5, colour = G.C.BLACK}, nodes={
     {n=G.UIT.R, config={align = "tm"}, nodes={

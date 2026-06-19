@@ -139,6 +139,19 @@ return {
           "{C:inactive}(Current Mult: {X:mult,C:white} X#23# {C:inactive}){}"
         }
       }
+    },
+    Mod = {
+      Expedition33 = {
+        name = "Expedition 33",
+        text = {
+          "Adds jokers inspired by",
+          "{V:2}Clair Obscur: Expedition 33{}",
+          "characters.",
+
+          "Assets by {V:1}#1#{}",
+          "Scripting by {V:1}#2#{}"
+        }
+      }
     }
   },
   misc = {
