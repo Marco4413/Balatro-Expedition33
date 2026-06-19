@@ -127,12 +127,17 @@ function create_UIBox_current_hand_row(hand_name, ...)
   local hand_row = ui_def_create_UIBox_current_hand_row(hand_name, ...)
   if not hand_row then return nil; end
 
+  local PADDING = 0.1
+  local SPRITE_SCALE = 0.4
   local mask = POKER_HAND_TO_MASK[hand_name]
   if mask then
-    local mask_icon = SMODS.create_sprite(0, 0, 0.4, 0.4, "exp33_j_monoco_icons", mask.sprite_pos)
-    table.insert(hand_row.nodes, 1, {n=G.UIT.C, config={align = "cm", padding = 0.1, colour = G.C.CLEAR}, nodes={
+    local mask_icon = SMODS.create_sprite(0, 0, SPRITE_SCALE, SPRITE_SCALE, "exp33_j_monoco_icons", mask.sprite_pos)
+    table.insert(hand_row.nodes, 1, {n=G.UIT.C, config={align = "cm", padding = PADDING, colour = G.C.CLEAR}, nodes={
       {n=G.UIT.O, config={object = mask_icon}}
     }})
+  else
+    local SCALE = SPRITE_SCALE + 2*PADDING
+    table.insert(hand_row.nodes, 1, {n=G.UIT.B, config={colour = G.C.CLEAR, w = SCALE, h = SCALE}})
   end
 
   return hand_row
