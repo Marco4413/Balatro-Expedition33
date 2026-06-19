@@ -41,6 +41,31 @@ return {
           "{C:inactive}(Current Mult: {X:mult,C:white} X#19# {C:inactive}){}"
         }
       },
+      j_exp33_maelle = {
+        name = "Combat Stance",
+        text = {
+          "The joker begins in",
+          "{V:1}#1#{} mode. Stances",
+          "change when playing",
+          "certain types of hands.",
+          "Open the {C:attention}Poker Hands tab{}",
+          "to see which Stance is",
+          "obtained from each hand.",
+          "Playing an hand that",
+          "changes to the same Stance",
+          "as the current one changes",
+          "back to {V:1}#1#{} mode.",
+          "Stance {C:attention}resets{} at the end",
+          "of the blind.",
+
+          "Stances:",
+          "{V:2}#2#{} - {X:chips,C:white} X#3# {} Chips",
+          "{V:3}#4#{} - {X:chips,C:white} X#5# {} Mult, {V:4}#6#$#7#{} on {C:attention}discard{}",
+          "{V:5}#8#{} - {X:mult,C:white} X#9# {} Mult",
+
+          "{C:inactive}(Current Stance: {V:6}#10#{C:inactive}){}"
+        }
+      },
       j_exp33_monoco = {
         name = "Bestial Wheel",
         text = {
@@ -129,6 +154,12 @@ return {
       exp33_gustave_damage_medium  = "Medium",
       exp33_gustave_damage_high    = "High",
       exp33_gustave_damage_extreme = "Extreme",
+
+      exp33_maelle_stance_reset = "Reset",
+      exp33_maelle_stance_stanceless = "Stanceless",
+      exp33_maelle_stance_defensive  = "Defensive",
+      exp33_maelle_stance_offensive  = "Offensive",
+      exp33_maelle_stance_virtuose   = "Virtuose",
 
       exp33_monoco_mask_almighty = "Almighty",
       exp33_monoco_mask_caster   = "Caster",

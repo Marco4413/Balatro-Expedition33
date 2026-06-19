@@ -31,6 +31,7 @@ end
 
 assert(SMODS.load_file("src/jokers/gustave.lua"))()
 assert(SMODS.load_file("src/jokers/lune.lua"))()
+assert(SMODS.load_file("src/jokers/maelle.lua"))()
 assert(SMODS.load_file("src/jokers/monoco.lua"))()
 assert(SMODS.load_file("src/jokers/sciel.lua"))()
 assert(SMODS.load_file("src/jokers/verso.lua"))()
@@ -55,6 +56,7 @@ function Game:start_run(args, ...)
     local joker_keys = {
       "j_exp33_gustave",
       "j_exp33_lune",
+      "j_exp33_maelle",
       "j_exp33_monoco",
       "j_exp33_sciel",
       "j_exp33_verso",
