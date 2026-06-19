@@ -20,7 +20,7 @@ You can find the full text [here](./assets/LICENSE.txt).
 
 Files **not** in the [`assets`](./assets/) folder are under the following license:
 
-Copyright (c) 2026 [Marco4413](https://github.com/Marco4413/Balatro_Expedition33)
+Copyright (c) 2026 [Marco4413](https://github.com/Marco4413/Balatro-Expedition33)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

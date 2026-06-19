@@ -1,7 +1,7 @@
 from pathlib import Path
 from zipfile import ZipFile
 
-MOD_NAME = "Balatro_Expedition33"
+MOD_NAME = "Expedition33"
 
 class DirectoryNotFoundError(OSError): ...
 
