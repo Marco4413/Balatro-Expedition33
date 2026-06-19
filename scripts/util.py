@@ -63,3 +63,24 @@ def zip_dir(zip: ZipFile, src_path: Path):
             arch_path = file_path.relative_to(src_path.parent)
             zip.write(file_path, arch_path)
             print(f"zip: {arch_path}")
+
+class Flags:
+    def __init__(self, args: list[str]|None = None):
+        if args is None:
+            from sys import argv
+            args = argv[1:]
+        self._flags: dict[str, bool] = dict()
+        self.parse(args)
+
+    def parse(self, args: list[str]):
+        for flag in args:
+            value = True
+            id_start = 0
+            for c in flag:
+                if c != "!": break
+                value = not value
+                id_start += 1
+            self._flags[flag[id_start:]] = value
+
+    def get(self, name: str, default: bool|None = None) -> bool:
+        return self._flags.get(name, False if default is None else default)

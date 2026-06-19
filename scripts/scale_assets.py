@@ -1,13 +1,13 @@
 from PIL import Image
 from . import util
 
-def scale_assets(*, clean: bool = False):
+def scale_assets(*, clean: bool = False, force: bool = False):
     root_dir = util.get_root_dir()
     assets_dir = root_dir / "assets"
     assets_1x_dir = assets_dir / "1x"
     assets_2x_dir = assets_dir / "2x"
 
-    if clean: util.delete_dir(assets_2x_dir)
+    if clean: util.delete_dir(assets_2x_dir, force=force)
 
     assets_1x_dir.mkdir(parents=True, exist_ok=True)
     assets_2x_dir.mkdir(parents=True, exist_ok=True)
@@ -28,4 +28,5 @@ def scale_assets(*, clean: bool = False):
             print(f"scale: {file_path} -> {resized_file_path}")
 
 if __name__ == "__main__":
-    scale_assets(clean=True)
+    flags = util.Flags()
+    scale_assets(clean=flags.get("clean", True), force=flags.get("force"))

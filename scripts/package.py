@@ -1,7 +1,7 @@
 from pathlib import Path
 from . import util
 
-def stage(*, clean: bool = False, regen_assets: bool = False) -> Path:
+def stage(*, clean: bool = False, regen_assets: bool = False, force: bool = False) -> Path:
     root_dir    = util.get_root_dir()
     staging_dir = util.get_staging_dir()
 
@@ -9,9 +9,9 @@ def stage(*, clean: bool = False, regen_assets: bool = False) -> Path:
         from .gen_lune_atlas import gen_lune_atlas
         from .scale_assets import scale_assets
         gen_lune_atlas()
-        scale_assets(clean=clean)
+        scale_assets(clean=clean, force=force)
 
-    if clean: util.delete_dir(staging_dir)
+    if clean: util.delete_dir(staging_dir, force=force)
     util.copy_into(root_dir / "assets",        staging_dir)
     util.copy_into(root_dir / "localization",  staging_dir)
     util.copy_into(root_dir / "src",           staging_dir)
@@ -20,15 +20,22 @@ def stage(*, clean: bool = False, regen_assets: bool = False) -> Path:
     util.copy_into(root_dir / "README.md",     staging_dir)
     return staging_dir
 
-def package(*, clean: bool = False, regen_assets: bool = False) -> Path:
+def package(*, clean: bool = False, regen_assets: bool = False, force: bool = False) -> Path:
     from zipfile import ZipFile, ZIP_DEFLATED
-    staging_dir = stage(clean=clean, regen_assets=regen_assets)
+    staging_dir = stage(clean=clean, regen_assets=regen_assets, force=force)
     out_archive = staging_dir.with_suffix(".zip")
     with ZipFile(out_archive, "w", compression=ZIP_DEFLATED, compresslevel=9) as zip:
         util.zip_dir(zip, staging_dir)
     return out_archive
 
 if __name__ == "__main__":
-    import sys
-    regen_assets = len(sys.argv) > 1 and sys.argv[1] == "full"
-    package(clean=True, regen_assets=regen_assets)
+    flags = util.Flags()
+    kwargs = {
+        "clean":        flags.get("clean", True),
+        "regen_assets": flags.get("regen"),
+        "force":        flags.get("force"),
+    }
+    if flags.get("stage"):
+        stage(**kwargs)
+    else:
+        package(**kwargs)
