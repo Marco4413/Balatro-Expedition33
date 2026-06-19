@@ -141,6 +141,21 @@ return {
     }
   },
   misc = {
+    -- https://www.reddit.com/r/expedition33/comments/1nek3i4/the_list_of_all_the_battle_voice_lines/
+    quips = {
+      exp33_gustave_loss = { "For those who come after." },
+      exp33_gustave_win  = { "The Expedition continues." },
+      exp33_lune_loss = { "When one falls, we continue." },
+      exp33_lune_win  = { "The journey is far from over." },
+      exp33_maelle_loss = { "Not looking good." },
+      exp33_maelle_win  = { "For a brighter future." },
+      exp33_monoco_loss = { "Ugh, slow as Verso." },
+      exp33_monoco_win  = { "What a lovely fight." },
+      exp33_sciel_loss = { "Death is a friend." },
+      exp33_sciel_win  = { "It was written in the stars." },
+      exp33_verso_loss = { "I'll always come back." },
+      exp33_verso_win  = { "One more day, one more battle won." }
+    },
     dictionary = {
       exp33_lune_stain_reset = "Reset",
       exp33_lune_stain_ice       = "Ice",
@@ -180,7 +195,9 @@ return {
       exp33_verso_rank_c = "C",
       exp33_verso_rank_b = "B",
       exp33_verso_rank_a = "A",
-      exp33_verso_rank_s = "S"
+      exp33_verso_rank_s = "S",
+
+      exp33_ui_config_enable_quips = "Enable Quips"
     },
     v_dictionary = {
       exp33_lune_got_stain = "+1 #1# Stain",

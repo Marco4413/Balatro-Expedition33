@@ -1,3 +1,5 @@
+local Utils = assert(SMODS.load_file("src/utils.lua"))()
+
 --[[ exp33_j_sciel ]] SMODS.Atlas {
   key  = "j_sciel",
   path = "jokers/sciel.png",
@@ -50,6 +52,23 @@ local SCIEL_TWILIGHT = {
   add_xmult  = 0.2,
   colour     = HEX("983ECB"),
   turns      = 2,
+}
+
+--[[ exp33_sciel ]] SMODS.JimboQuip {
+  key = "sciel",
+  extra = {
+    center = "j_exp33_sciel",
+  },
+  filter = function (self, quip_type)
+    if not self.mod.config.enable_quips then return false; end
+    if not next(SMODS.find_card(self.extra.center)) then return false; end
+    self.extra.text_key = table.concat({self.key, quip_type}, "_")
+    self.extra.particle_colours = Utils.pick_unique_random(
+        SCIEL_CHARGE_, 3,
+        function (damage) return damage.colour; end
+      )
+    return true, { weight = 10 }
+  end,
 }
 
 --[[ j_exp33_sciel ]] SMODS.Joker {

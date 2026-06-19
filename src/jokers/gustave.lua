@@ -1,3 +1,5 @@
+local Utils = assert(SMODS.load_file("src/utils.lua"))()
+
 --[[ exp33_j_gustave ]] SMODS.Atlas {
   key  = "j_gustave",
   path = "jokers/gustave.png",
@@ -31,6 +33,23 @@ local function get_gustave_charges_damage(charges)
   end
   return damage
 end
+
+--[[ exp33_gustave ]] SMODS.JimboQuip {
+  key = "gustave",
+  extra = {
+    center = "j_exp33_gustave",
+  },
+  filter = function (self, quip_type)
+    if not self.mod.config.enable_quips then return false; end
+    if not next(SMODS.find_card(self.extra.center)) then return false; end
+    self.extra.text_key = table.concat({self.key, quip_type}, "_")
+    self.extra.particle_colours = Utils.pick_unique_random(
+        GUSTAVE_DAMAGE_, 3,
+        function (damage) return damage.colour; end
+      )
+    return true, { weight = 10 }
+  end,
+}
 
 --[[ j_exp33_gustave ]] SMODS.Joker {
   key   = "gustave",

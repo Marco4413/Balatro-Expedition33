@@ -1,3 +1,5 @@
+local Utils = assert(SMODS.load_file("src/utils.lua"))()
+
 --[[ exp33_j_verso ]] SMODS.Atlas {
   key  = "j_verso",
   path = "jokers/verso.png",
@@ -32,6 +34,23 @@ local function get_verso_perfection_rank(perfection)
   end
   return rank
 end
+
+--[[ exp33_verso ]] SMODS.JimboQuip {
+  key = "verso",
+  extra = {
+    center = "j_exp33_verso",
+  },
+  filter = function (self, quip_type)
+    if not self.mod.config.enable_quips then return false; end
+    if not next(SMODS.find_card(self.extra.center)) then return false; end
+    self.extra.text_key = table.concat({self.key, quip_type}, "_")
+    self.extra.particle_colours = Utils.pick_unique_random(
+        VERSO_RANK_, 3,
+        function (damage) return damage.colour; end
+      )
+    return true, { weight = 10 }
+  end,
+}
 
 --[[ j_exp33_verso ]] SMODS.Joker {
   key   = "verso",

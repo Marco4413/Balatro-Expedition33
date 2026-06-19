@@ -1,3 +1,5 @@
+local Utils = assert(SMODS.load_file("src/utils.lua"))()
+
 --[[ exp33_j_maelle ]] SMODS.Atlas {
   key  = "j_maelle",
   path = "jokers/maelle.png",
@@ -89,6 +91,23 @@ end
 local function get_sign(n)
   return (n < 0 and -1) or (n > 0 and 1) or (0)
 end
+
+--[[ exp33_maelle ]] SMODS.JimboQuip {
+  key = "maelle",
+  extra = {
+    center = "j_exp33_maelle",
+  },
+  filter = function (self, quip_type)
+    if not self.mod.config.enable_quips then return false; end
+    if not next(SMODS.find_card(self.extra.center)) then return false; end
+    self.extra.text_key = table.concat({self.key, quip_type}, "_")
+    self.extra.particle_colours = Utils.pick_unique_random(
+        MAELLE_STANCE_, 3,
+        function (damage) return damage.colour; end
+      )
+    return true, { weight = 10 }
+  end,
+}
 
 --[[ j_exp33_maelle ]] SMODS.Joker {
   key   = "maelle",

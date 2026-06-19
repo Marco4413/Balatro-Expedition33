@@ -13,9 +13,8 @@ end
 MOD.config_tab = function ()
   return {n=G.UIT.ROOT, config={align = "cm", r = 0.1, padding = 0.5, colour = G.C.BLACK}, nodes={
     {n=G.UIT.R, config={align = "tm"}, nodes={
-      create_toggle{ label="Debug", ref_table=MOD.config, ref_value="debug", callback=function (value)
-        MOD.log_debug("debug: ", value)
-      end }
+      create_toggle{label="Debug", ref_table=MOD.config, ref_value="debug"},
+      create_toggle{label=localize("exp33_ui_config_enable_quips"), ref_table=MOD.config, ref_value="enable_quips"},
     }}
   }}
 end

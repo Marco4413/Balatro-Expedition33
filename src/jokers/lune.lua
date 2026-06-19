@@ -1,3 +1,5 @@
+local Utils = assert(SMODS.load_file("src/utils.lua"))()
+
 --[[ exp33_j_lune ]] SMODS.Atlas {
   key  = "j_lune",
   path = "jokers/lune.png",
@@ -159,6 +161,23 @@ local function get_or_create_shared_stain_sprite()
   SHARED_STAIN_SPRITE = SMODS.create_sprite(0, 0, 0, 0, "exp33_j_lune", { x = 1, y = 0 })
   return SHARED_STAIN_SPRITE
 end
+
+--[[ exp33_lune ]] SMODS.JimboQuip {
+  key = "lune",
+  extra = {
+    center = "j_exp33_lune",
+  },
+  filter = function (self, quip_type)
+    if not self.mod.config.enable_quips then return false; end
+    if not next(SMODS.find_card(self.extra.center)) then return false; end
+    self.extra.text_key = table.concat({self.key, quip_type}, "_")
+    self.extra.particle_colours = Utils.pick_unique_random(
+        Utils.table_to_array(LUNE_STAIN_), 3,
+        function (stain) return stain.colour; end
+      )
+    return true, { weight = 10 }
+  end,
+}
 
 --[[ j_exp33_lune ]] SMODS.Joker {
   key   = "lune",

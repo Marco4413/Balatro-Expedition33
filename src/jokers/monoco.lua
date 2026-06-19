@@ -1,3 +1,5 @@
+local Utils = assert(SMODS.load_file("src/utils.lua"))()
+
 --[[ exp33_j_monoco ]] SMODS.Atlas {
   key  = "j_monoco",
   path = "jokers/monoco.png",
@@ -142,6 +144,23 @@ function create_UIBox_current_hand_row(hand_name, ...)
 
   return hand_row
 end
+
+--[[ exp33_monoco ]] SMODS.JimboQuip {
+  key = "monoco",
+  extra = {
+    center = "j_exp33_monoco",
+  },
+  filter = function (self, quip_type)
+    if not self.mod.config.enable_quips then return false; end
+    if not next(SMODS.find_card(self.extra.center)) then return false; end
+    self.extra.text_key = table.concat({self.key, quip_type}, "_")
+    self.extra.particle_colours = Utils.pick_unique_random(
+        Utils.table_to_array(MONOCO_MASK_), 3,
+        function (mask) return mask.colour; end
+      )
+    return true, { weight = 10 }
+  end,
+}
 
 --[[ j_exp33_monoco ]] SMODS.Joker {
   key   = "monoco",
