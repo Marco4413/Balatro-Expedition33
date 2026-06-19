@@ -14,7 +14,7 @@ return {
           "card while {V:2}#2#{}, {V:4}#5#{}, {V:6}#8#{}",
           "and {V:8}#11#{} Stains are active.",
           "{V:9}#13#{} Stain boosts all Suits.",
-          "Stains are reset at the end of the",
+          "Stains are {C:attention}reset{} at the end of the",
           "round.",
 
           "{V:1}#1#{} - {V:2}#2#{} {X:chips,C:white} +X#3# {} Chips",
@@ -27,9 +27,10 @@ return {
       j_exp33_gustave = {
         name = "Overcharge",
         text = {
-          "{C:red}+1{} Charge for each scored",
-          "card. Charges {C:attention}reset{} at",
-          "the end of the round.",
+          "{C:red}+1{} Charge for each played",
+          "scoring card. Charges",
+          "{C:attention}reset{} at the end of the",
+          "round.",
 
           "Damage thresholds:",
           "{V:1}#1# #2#{}-{V:1}#3#{} {X:mult,C:white} X#4# {} Mult",
@@ -44,7 +45,7 @@ return {
       j_exp33_maelle = {
         name = "Combat Stance",
         text = {
-          "The joker begins in",
+          "The Joker begins in",
           "{V:1}#1#{} mode. Stances",
           "change when playing",
           "certain types of hands.",
@@ -60,7 +61,7 @@ return {
 
           "Stances:",
           "{V:2}#2#{} - {X:chips,C:white} X#3# {} Chips",
-          "{V:3}#4#{} - {X:chips,C:white} X#5# {} Mult, {V:4}#6#$#7#{} on {C:attention}discard{}",
+          "{V:3}#4#{} - {X:mult,C:white} X#5# {} Mult, {V:4}#6#$#7#{} on {C:attention}discard{}",
           "{V:5}#8#{} - {X:mult,C:white} X#9# {} Mult",
 
           "{C:inactive}(Current Stance: {V:6}#10#{C:inactive}){}"
@@ -104,7 +105,7 @@ return {
           "cannot create Charges while",
           "in {V:9}#9#{} and they go",
           "back to zero when it ends.",
-          "The Joker resets at the end",
+          "The Joker {C:attention}resets{} at the end",
           "of the Blind.",
 
           "{V:2}#2#{} and {V:3}#3#{} - {V:1}#1#{} {X:mult,C:white}",
@@ -122,10 +123,10 @@ return {
         name = "Perfection",
         text = {
           "{C:red}+1{} Perfection for each",
-          "scoring card. {C:red}-1{} perfection",
-          "for each discarded card.",
-          "Perfection {C:attention}resets{} each",
-          "ante.",
+          "played scoring card.",
+          "{C:red}-1{} Perfection for each",
+          "{C:attention}discarded card{}. Perfection",
+          "{C:attention}resets{} each ante.",
 
           "Rank thresholds:",
           "{V:1}#1# #2#{}-{V:1}#3#{} {X:mult,C:white} X#4# {} Mult",
