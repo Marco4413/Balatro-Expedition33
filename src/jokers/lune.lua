@@ -184,6 +184,9 @@ end
   atlas = "j_lune",
   pos   = { x = 0, y = 0 },
 
+  rarity = 1,
+  cost   = 4,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,

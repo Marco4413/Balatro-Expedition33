@@ -56,6 +56,9 @@ end
   atlas = "j_gustave",
   pos   = GUSTAVE_DAMAGE_.LOWEST.sprite_pos,
 
+  rarity = 1,
+  cost   = 4,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,

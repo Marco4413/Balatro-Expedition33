@@ -114,6 +114,9 @@ end
   atlas = "j_maelle",
   pos   = MAELLE_STANCELESS_SPRITE_POS,
 
+  rarity = 2,
+  cost   = 6,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,

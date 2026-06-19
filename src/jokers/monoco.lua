@@ -167,6 +167,9 @@ end
   atlas = "j_monoco",
   pos   = MONOCO_MASK_[MONOCO_MASK_INIT].sprite_pos,
 
+  rarity = 2,
+  cost   = 6,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,

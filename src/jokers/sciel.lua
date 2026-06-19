@@ -76,6 +76,9 @@ local SCIEL_TWILIGHT = {
   atlas = "j_sciel",
   pos   = SCIEL_BASE_SPRITE_POS,
 
+  rarity = 2,
+  cost   = 6,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,

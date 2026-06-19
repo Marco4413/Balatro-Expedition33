@@ -57,6 +57,9 @@ end
   atlas = "j_verso",
   pos   = VERSO_RANK_.LOWEST.sprite_pos,
 
+  rarity = 2,
+  cost   = 6,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,
