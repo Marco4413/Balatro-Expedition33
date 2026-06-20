@@ -10,7 +10,7 @@
   "badge_text_colour": "ECCFA3",
   "display_name": "Exp33",
   "icon_path": "modicon.png",
-  "version": "1.0.0",
+  "version": "1.0.0~dev",
   "dependencies": [
     "Steamodded (==1.*~)",
     "Balatro (==1.0.1~)"
