@@ -23,7 +23,14 @@ def stage(*, clean: bool = False, regen_assets: bool = False, force: bool = Fals
 def package(*, clean: bool = False, regen_assets: bool = False, force: bool = False) -> Path:
     from zipfile import ZipFile, ZIP_DEFLATED
     staging_dir = stage(clean=clean, regen_assets=regen_assets, force=force)
-    out_archive = staging_dir.with_name(f"{util.MOD_NAME}-{util.get_mod_version()}").with_suffix(".zip")
+
+    artifact_dir = util.get_artifact_dir()
+    mod_version  = util.get_mod_version()
+    if clean:
+        util.delete_dir(artifact_dir, force=force)
+    util.mkdir(artifact_dir)
+
+    out_archive = artifact_dir / f"{util.MOD_NAME}-{mod_version}.zip"
     with ZipFile(out_archive, "w", compression=ZIP_DEFLATED, compresslevel=9) as zip:
         util.zip_dir(zip, staging_dir)
     return out_archive

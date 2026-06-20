@@ -14,6 +14,9 @@ def get_build_dir() -> Path:
 def get_staging_dir() -> Path:
     return get_build_dir() / MOD_NAME
 
+def get_artifact_dir() -> Path:
+    return get_build_dir() / "artifact"
+
 def get_mods_dir() -> Path:
     import os, sys
     if sys.platform == "win32":
