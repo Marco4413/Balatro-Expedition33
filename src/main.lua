@@ -46,7 +46,7 @@ if not SMODS.get_atlas("exp33_modicon") then
   SMODS.Atlas {
     key  = "modicon",
     path = "modicon.png",
-    px = 128, py = 128,
+    px = 35, py = 35,
   }
 end
 
