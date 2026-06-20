@@ -79,6 +79,8 @@ local SCIEL_TWILIGHT = {
   rarity = 2,
   cost   = 6,
 
+  blueprint_compat = true,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,
@@ -151,12 +153,21 @@ local SCIEL_TWILIGHT = {
   end,
 
   calculate = function (self, card, context)
-    if context.blind_defeated then
-      return self:calculate_reset(card)
+    if context.joker_main then
+      local calc = self:calculate_twilight_boost(card)
+      if context.blueprint then return calc; end
+
+      local calc_turn = self:calculate_twilight_turn(card)
+      if not calc then return calc_turn; end
+
+      calc.func = calc_turn and calc_turn.func or nil
+      return calc
     end
 
-    if context.joker_main then
-      return self:calculate_twilight(card)
+    if context.blueprint then return nil; end
+
+    if context.blind_defeated then
+      return self:calculate_reset(card)
     end
 
     if context.individual and context.cardarea == G.play then
@@ -256,16 +267,9 @@ local SCIEL_TWILIGHT = {
   ---@param self SMODS.Joker
   ---@param card Card
   ---@return table|nil calc
-  calculate_twilight = function (self, card)
+  calculate_twilight_turn = function (self, card)
     if card.ability.extra.twilight_remaining <= 0 then
       return nil
-    end
-
-    local twilight_xmult = 1
-    for i=1, #SCIEL_CHARGE_ do
-      local charge = SCIEL_CHARGE_[i]
-      local charge_count = card.ability.extra[charge.id .. "_charges"]
-      twilight_xmult = twilight_xmult + SCIEL_TWILIGHT.add_xmult * charge_count
     end
 
     local new_twilight_remaining = card.ability.extra.twilight_remaining - 1
@@ -290,8 +294,26 @@ local SCIEL_TWILIGHT = {
           end
         })
       end,
-      xmult = twilight_xmult,
+      effect = true,
     }
+  end,
+
+  ---@param self SMODS.Joker
+  ---@param card Card
+  ---@return table|nil calc
+  calculate_twilight_boost = function (self, card)
+    if card.ability.extra.twilight_remaining <= 0 then
+      return nil
+    end
+
+    local twilight_xmult = 1
+    for i=1, #SCIEL_CHARGE_ do
+      local charge = SCIEL_CHARGE_[i]
+      local charge_count = card.ability.extra[charge.id .. "_charges"]
+      twilight_xmult = twilight_xmult + SCIEL_TWILIGHT.add_xmult * charge_count
+    end
+
+    return { xmult = twilight_xmult }
   end,
 
   ---@param self SMODS.Joker

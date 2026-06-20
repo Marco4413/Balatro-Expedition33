@@ -75,6 +75,7 @@ function Game:start_run(args, ...)
   if not is_starting_new_run then return; end
   if MOD.DEBUG.enabled then
     local joker_keys = {
+      "j_blueprint",
       "j_exp33_gustave",
       "j_exp33_lune",
       "j_exp33_maelle",

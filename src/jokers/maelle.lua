@@ -117,6 +117,8 @@ end
   rarity = 2,
   cost   = 6,
 
+  blueprint_compat = true,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,
@@ -180,16 +182,18 @@ end
   end,
 
   calculate = function (self, card, context)
-    if context.blind_defeated then
-      return self:calculate_stance_reset(card)
-    end
-
     if context.joker_main then
       return self:calculate_stance_main(card)
     end
 
     if context.pre_discard then
       return self:calculate_stance_discard(card)
+    end
+
+    if context.blueprint then return nil; end
+
+    if context.blind_defeated then
+      return self:calculate_stance_reset(card)
     end
 
     if context.after then

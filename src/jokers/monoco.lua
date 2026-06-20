@@ -170,6 +170,8 @@ end
   rarity = 2,
   cost   = 6,
 
+  blueprint_compat = true,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,
@@ -214,16 +216,18 @@ end
   end,
 
   calculate = function (self, card, context)
+    if context.joker_main then
+      return self:calculate_mask(card, context)
+    end
+
+    if context.blueprint then return nil; end
+
     if context.final_scoring_step then
       if #context.scoring_hand <= 0 then return nil; end
 
       local left_most_card = context.scoring_hand[1]
       local card_value = left_most_card.base.nominal
       return self:calculate_wheel_spin(card, card_value)
-    end
-
-    if context.joker_main then
-      return self:calculate_mask(card, context)
     end
 
     --[[ if context.individual and context.cardarea == G.play then

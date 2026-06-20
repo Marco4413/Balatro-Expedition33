@@ -59,6 +59,8 @@ end
   rarity = 1,
   cost   = 4,
 
+  blueprint_compat = true,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,
@@ -101,12 +103,14 @@ end
   end,
 
   calculate = function (self, card, context)
-    if context.blind_defeated then
-      return self:calculate_reset_charges(card)
-    end
-
     if context.joker_main then
       return self:calculate_charges(card)
+    end
+
+    if context.blueprint then return nil; end
+
+    if context.blind_defeated then
+      return self:calculate_reset_charges(card)
     end
 
     if context.individual and context.cardarea == G.play then

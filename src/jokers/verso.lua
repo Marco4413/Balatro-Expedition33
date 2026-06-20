@@ -60,6 +60,8 @@ end
   rarity = 2,
   cost   = 6,
 
+  blueprint_compat = true,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,
@@ -102,12 +104,14 @@ end
   end,
 
   calculate = function (self, card, context)
-    if context.ante_change then
-      return self:calculate_perfection_reset(card)
-    end
-
     if context.joker_main then
       return self:calculate_perfection(card)
+    end
+
+    if context.blueprint then return nil; end
+
+    if context.ante_change then
+      return self:calculate_perfection_reset(card)
     end
 
     if context.individual and context.cardarea == G.play then

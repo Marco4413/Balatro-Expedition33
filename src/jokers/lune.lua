@@ -187,6 +187,8 @@ end
   rarity = 1,
   cost   = 4,
 
+  blueprint_compat = true,
+
   discovered    = true,
   unlocked      = true,
   no_collection = false,
@@ -231,12 +233,21 @@ end
   end,
 
   calculate = function (self, card, context)
-    if context.blind_defeated then
-      return self:calculate_reset_stains(card)
+    if context.individual and context.cardarea == G.play then
+      local calc = self:calculate_stains(card, context.other_card.base.suit)
+      if context.blueprint then return calc; end
+
+      local calc_next = self:calculate_next_stain(card, context.other_card.base.suit)
+      if not calc then return calc_next; end
+
+      calc.func = calc_next.func
+      return calc
     end
 
-    if context.individual and context.cardarea == G.play then
-      return self:calculate_stain(card, context.other_card.base.suit)
+    if context.blueprint then return nil; end
+
+    if context.blind_defeated then
+      return self:calculate_reset_stains(card)
     end
   end,
 
@@ -291,7 +302,37 @@ end
   ---@param card Card
   ---@param suit Suit
   ---@return table|nil calc
-  calculate_stain = function (self, card, suit)
+  calculate_next_stain = function (self, card, suit)
+    local stains = card.ability.extra.stains
+    local stain  = lune_try_generate_light_stain(stains) or CARD_SUIT_TO_STAIN[suit]
+    if not stain then return nil; end
+    lune_cycle_stains(stains, stain.id)
+
+    return {
+      func = function ()
+        G.E_MANAGER:add_event(Event{
+          func = function ()
+            local display_stains = card.ability.extra.display_stains
+            lune_try_generate_light_stain(display_stains)
+            lune_cycle_stains(display_stains, stain.id)
+            return true
+          end
+        })
+      end,
+      message = localize{
+        type = "variable",
+        key  = "exp33_lune_got_stain",
+        vars = { localize("exp33_lune_stain_" .. stain.id) },
+      },
+      effect = true,
+    }
+  end,
+
+  ---@param self SMODS.Joker
+  ---@param card Card
+  ---@param suit Suit
+  ---@return table|nil calc
+  calculate_stains = function (self, card, suit)
     local stains       = card.ability.extra.stains
     local stains_count = lune_count_stains(stains)
 
@@ -303,39 +344,7 @@ end
       end
     end
 
-    local calc = nil
-    local stain = lune_try_generate_light_stain(stains, stains_count) or CARD_SUIT_TO_STAIN[suit]
-    if stain then
-      lune_cycle_stains(stains, stain.id)
-
-      calc = {
-        func = function ()
-          G.E_MANAGER:add_event(Event{
-            func = function ()
-              local display_stains = card.ability.extra.display_stains
-              lune_try_generate_light_stain(display_stains)
-              lune_cycle_stains(display_stains, stain.id)
-              return true
-            end
-          })
-        end,
-        effect = true,
-      }
-
-      if add_xchips <= 1 then
-        calc.message = localize{
-          type = "variable",
-          key  = "exp33_lune_got_stain",
-          vars = { localize("exp33_lune_stain_" .. stain.id) },
-        }
-      end
-    end
-
-    if add_xchips > 1 then
-      calc = calc or {}
-      calc.xchips = add_xchips
-    end
-
-    return calc
+    if add_xchips <= 1 then return nil; end
+    return { xchips = add_xchips }
   end,
 }
