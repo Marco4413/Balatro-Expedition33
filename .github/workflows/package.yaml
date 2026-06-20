@@ -1,0 +1,28 @@
+name: Package
+
+on:
+  push:
+    tags:
+      - v*
+  workflow_dispatch: {}
+
+jobs:
+  package:
+    runs-on: ubuntu-slim
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Prepare Artifact
+        run:
+          python3 -m scripts.package force stage
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Expedition33
+          path: build
+          if-no-files-found: error
