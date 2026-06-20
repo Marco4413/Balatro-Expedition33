@@ -5,9 +5,8 @@ return {
         name = "Overcharge",
         text = {
           "{C:red}+1{} Charge for each played",
-          "scoring card. Charges",
-          "{C:attention}reset{} at the end of the",
-          "round.",
+          "scoring card. Charges {C:attention}reset{}",
+          "at the end of each Blind.",
 
           "Damage thresholds:",
           "{V:1}#1# #2#{}-{V:1}#3#{} {X:mult,C:white} X#4# {} Mult",
@@ -32,8 +31,8 @@ return {
           "card while {V:2}#2#{}, {V:4}#5#{}, {V:6}#8#{}",
           "and {V:8}#11#{} Stains are active.",
           "{V:9}#13#{} Stain boosts all Suits.",
-          "Stains are {C:attention}reset{} at the end of the",
-          "round.",
+          "Stains are {C:attention}reset{} at the end",
+          "of each Blind.",
 
           "{V:1}#1#{} - {V:2}#2#{} {X:chips,C:white} +X#3# {} Chips",
           "{V:3}#4#{} - {V:4}#5#{} {X:chips,C:white} +X#6# {} Chips",
@@ -45,19 +44,15 @@ return {
       j_exp33_maelle = {
         name = "Battle Stance",
         text = {
-          "The Joker begins in",
-          "{V:1}#1#{} mode. Stances",
-          "change when playing",
-          "certain types of hands.",
-          "Open the {C:attention}Poker Hands tab{}",
-          "to see which Stance is",
-          "obtained from each hand.",
-          "Playing an hand that",
-          "changes to the same Stance",
-          "as the current one changes",
-          "back to {V:1}#1#{} mode.",
-          "Stance {C:attention}resets{} at the end",
-          "of the blind.",
+          "The Joker begins in {V:1}#1#{} mode.",
+          "Stances change when playing certain",
+          "types of hands. Open the {C:attention}Poker Hands{}",
+          "{C:attention}tab{} to see which Stance is obtained",
+          "from each hand. Playing an hand that",
+          "changes to the same Stance as the",
+          "current one changes back to {V:1}#1#{}",
+          "mode. Stance {C:attention}resets{} at the end of",
+          "each Blind.",
 
           "Stances:",
           "{V:2}#2#{} {X:chips,C:white} X#3# {} Chips",
@@ -126,7 +121,7 @@ return {
           "played scoring card.",
           "{C:red}-1{} Perfection for each",
           "{C:attention}discarded card{}. Perfection",
-          "{C:attention}resets{} each ante.",
+          "{C:attention}resets{} each Ante.",
 
           "Rank thresholds:",
           "{V:1}#1# #2#{}-{V:1}#3#{} {X:mult,C:white} X#4# {} Mult",
@@ -148,8 +143,8 @@ return {
           "{V:2}Clair Obscur: Expedition 33{}",
           "characters.",
 
-          "Assets by {V:1}#1#{}",
-          "Scripting by {V:1}#2#{}"
+          "Assets: {V:1}#1#{}",
+          "Scripting: {V:1}#2#{}"
         }
       }
     }
