@@ -33,12 +33,19 @@ def get_mod_version() -> str:
     output: str = subprocess.check_output(["git", "describe", "--tags", "--abbrev=0", "--match=v*"], encoding="utf-8")
     return output.strip()[1:]
 
+def mkdir(dir_path: Path):
+    if dir_path.exists():
+        if not dir_path.is_dir():
+            raise NotADirectoryError(f"'{dir_path}' already exists and is not a directory")
+    else:
+        dir_path.mkdir(parents=True, exist_ok=True)
+        print(f"mkdir: {dir_path}")
+
 def copy_into(src_path: Path, dst_dir: Path):
     import shutil
-    if not dst_dir.exists():
-        dst_dir.mkdir(parents=True, exist_ok=True)
-    if not dst_dir.is_dir():
+    if dst_dir.exists() and not dst_dir.is_dir():
         raise NotADirectoryError(f"cannot copy '{src_path}' into '{dst_dir}' because the latter is not a directory")
+    mkdir(dst_dir)
     dst_path = dst_dir / src_path.name
     if src_path.is_dir():
         shutil.copytree(src_path, dst_path, dirs_exist_ok=True)

@@ -9,15 +9,15 @@ def scale_assets(*, clean: bool = False, force: bool = False):
 
     if clean: util.delete_dir(assets_2x_dir, force=force)
 
-    assets_1x_dir.mkdir(parents=True, exist_ok=True)
-    assets_2x_dir.mkdir(parents=True, exist_ok=True)
+    util.mkdir(assets_1x_dir)
+    util.mkdir(assets_2x_dir)
 
     for file_path in assets_1x_dir.glob("**/*.png"):
         if not file_path.is_file(): continue
         with Image.open(file_path) as image_asset:
             file_path_relative_to_root = file_path.relative_to(assets_1x_dir)
             resized_file_path = assets_2x_dir / file_path_relative_to_root
-            resized_file_path.parent.mkdir(parents=True, exist_ok=True)
+            util.mkdir(resized_file_path.parent)
 
             (original_width, original_height) = image_asset.size
             image_asset_2x = image_asset.resize(
