@@ -28,6 +28,11 @@ def get_mods_dir() -> Path:
     else:
         assert False, f"[get_mods_dir]: unsupported os: {sys.platform}"
 
+def get_mod_version() -> str:
+    import subprocess
+    output: str = subprocess.check_output(["git", "describe", "--tags", "--abbrev=0", "--match=v*"], encoding="utf-8")
+    return output.strip()[1:]
+
 def copy_into(src_path: Path, dst_dir: Path):
     import shutil
     if not dst_dir.exists():
