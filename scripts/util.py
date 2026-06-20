@@ -30,8 +30,27 @@ def get_mods_dir() -> Path:
 
 def get_mod_version() -> str:
     import subprocess
-    output: str = subprocess.check_output(["git", "describe", "--tags", "--abbrev=0", "--match=v*"], encoding="utf-8")
-    return output.strip()[1:]
+
+    try:
+        output = subprocess.check_output(
+            ("git", "describe", "--tags", "--abbrev=0", "--match=v*"),
+            stderr=subprocess.STDOUT,
+            encoding="utf-8",
+            universal_newlines=True)
+        return output.strip()[1:]
+    except subprocess.CalledProcessError as err:
+        print(f"get_mod_version: WARN: {err.output.strip()}")
+
+    try:
+        output = subprocess.check_output(
+            ("git", "rev-parse", "--abbrev-ref", "HEAD"),
+            stderr=subprocess.STDOUT,
+            encoding="utf-8",
+            universal_newlines=True)
+        return output.strip()
+    except subprocess.CalledProcessError as err:
+        print(f"get_mod_version: WARN: {err.output.strip()}")
+        return ""
 
 def mkdir(dir_path: Path):
     if dir_path.exists():
