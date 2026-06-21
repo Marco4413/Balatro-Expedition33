@@ -1,9 +1,16 @@
+import dataclasses
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any, ClassVar
 from zipfile import ZipFile
 
-MOD_NAME = "Expedition33"
-
 class DirectoryNotFoundError(OSError): ...
+
+def get_mod_name() -> str:
+    return ModMetadata.get().id
+
+def get_mod_version() -> str:
+    return ModMetadata.get().version
 
 def get_root_dir() -> Path:
     return Path(__file__).parent.parent.relative_to(Path.cwd(), walk_up=True)
@@ -12,7 +19,7 @@ def get_build_dir() -> Path:
     return get_root_dir() / "build"
 
 def get_staging_dir() -> Path:
-    return get_build_dir() / MOD_NAME
+    return get_build_dir() / get_mod_name()
 
 def get_artifact_dir() -> Path:
     return get_build_dir() / "artifact"
@@ -30,12 +37,6 @@ def get_mods_dir() -> Path:
         return mods_dir
     else:
         assert False, f"[get_mods_dir]: unsupported os: {sys.platform}"
-
-def get_mod_version() -> str:
-    import json
-    metadata_path = get_root_dir() / "metadata.json"
-    metadata = json.loads(metadata_path.read_bytes())
-    return metadata["version"]
 
 def mkdir(dir_path: Path):
     if dir_path.exists():
@@ -100,3 +101,42 @@ class Flags:
 
     def get(self, name: str, default: bool|None = None) -> bool:
         return self._flags.get(name, False if default is None else default)
+
+def dataclass_init_from_kwargs(instance: object, /, **kwargs: Any):
+    """Initializes dataclass `instance` with `kwargs`, extra arguments are ignored."""
+    if not dataclasses.is_dataclass(instance) or isinstance(instance, type):
+        raise TypeError("dataclass_init_from_kwargs() should be called on dataclass instances")
+
+    for field in dataclasses.fields(instance):
+        value: Any = dataclasses.MISSING
+        if field.name in kwargs:
+            value = kwargs[field.name]
+        elif field.default_factory is not dataclasses.MISSING:
+            value = field.default_factory()
+        elif field.default is not dataclasses.MISSING:
+            value = field.default
+
+        if value is dataclasses.MISSING:
+            raise KeyError(f"field {field.name} is missing and has no default")
+
+        setattr(instance, field.name, value)
+
+@dataclass
+class ModMetadata:
+    id: str
+    version: str
+
+    _loaded: "ClassVar[ModMetadata|None]" = None
+
+    def __init__(self, /, **kwargs: Any):
+        dataclass_init_from_kwargs(self, **kwargs)
+
+    @staticmethod
+    def get() -> "ModMetadata":
+        import json
+        if ModMetadata._loaded is not None:
+            return ModMetadata._loaded
+        metadata_path = get_root_dir() / "metadata.json"
+        metadata = json.loads(metadata_path.read_bytes())
+        ModMetadata._loaded = ModMetadata(**metadata)
+        return ModMetadata._loaded

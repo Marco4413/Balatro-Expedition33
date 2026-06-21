@@ -25,12 +25,13 @@ def package(*, clean: bool = False, regen_assets: bool = False, force: bool = Fa
     staging_dir = stage(clean=clean, regen_assets=regen_assets, force=force)
 
     artifact_dir = util.get_artifact_dir()
+    mod_name     = util.get_mod_name()
     mod_version  = util.get_mod_version()
     if clean:
         util.delete_dir(artifact_dir, force=force)
     util.mkdir(artifact_dir)
 
-    out_archive = artifact_dir / f"{util.MOD_NAME}-{mod_version}.zip"
+    out_archive = artifact_dir / f"{mod_name}-{mod_version}.zip"
     with ZipFile(out_archive, "w", compression=ZIP_DEFLATED, compresslevel=9) as zip:
         util.zip_dir(zip, staging_dir)
     return out_archive
