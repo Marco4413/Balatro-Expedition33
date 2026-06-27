@@ -252,29 +252,8 @@ end
   end,
 
   draw = function (self, card, layer)
-    if layer ~= "card" and layer ~= "both" then return; end
-
-    if card.facing == "front" then
-      local stain_sprite_directions = { "left", "top", "right", "bottom" }
-
-      local shared_stain_sprite = get_or_create_shared_stain_sprite()
-      shared_stain_sprite:set_role{ major = card, role_type = "Glued", draw_major = card }
-      shared_stain_sprite:glue_to_major(card)
-
-      for i=1, #stain_sprite_directions do
-        local display_stain_id = card.ability.extra.display_stains[i]
-        if display_stain_id then
-          local display_stain = LUNE_STAIN_[display_stain_id]
-          local stain_sprite_direction = stain_sprite_directions[i]
-          shared_stain_sprite:set_sprite_pos(display_stain.sprite_pos[stain_sprite_direction])
-          shared_stain_sprite:draw_shader(
-              "dissolve",
-              nil, shared_stain_sprite.ARGS.send_to_shader, nil,
-              card.children.center
-            )
-        end
-      end
-    end
+    if card.exp33_draw_lune_stains then return; end
+    card.exp33_draw_lune_stains = true
   end,
 
   ---@param self SMODS.Joker
@@ -347,4 +326,60 @@ end
     if add_xchips <= 1 then return nil; end
     return { xchips = add_xchips }
   end,
+}
+
+---@param card Card
+---@return string[]
+local function get_card_shaders(card)
+  local shaders = { "dissolve" }
+
+  -- stolen from `smods/card_draw.lua:305`
+
+  local card_edition = card.delay_edition or card.edition
+  if card_edition then
+    for _, edition in next, G.P_CENTER_POOLS.Edition do
+      if card_edition[edition.key:sub(3)] and edition.shader then
+        table.insert(shaders, edition.shader)
+      end
+    end
+
+    if card_edition.negative or (card.ability.name == "Antimatter" and (card.config.center.discovered or card.bypass_discovery_center)) then
+      table.insert(shaders, "negative_shine")
+    end
+  end
+
+  return shaders
+end
+
+SMODS.DrawStep {
+  key = "lune_stains",
+  order = 25,
+  func = function (card, layer)
+    if not card.exp33_draw_lune_stains then return; end
+
+    local display_stains = card.ability.extra and card.ability.extra.display_stains
+    if not display_stains then return; end
+
+    local stain_sprite_directions = { "left", "top", "right", "bottom" }
+
+    local shared_stain_sprite = get_or_create_shared_stain_sprite()
+    shared_stain_sprite:set_role{ major = card, role_type = "Glued", draw_major = card }
+    shared_stain_sprite:glue_to_major(card)
+
+    local shaders = get_card_shaders(card)
+
+    for i=1, #stain_sprite_directions do
+      local display_stain_id = display_stains[i]
+      if display_stain_id then
+        local display_stain = LUNE_STAIN_[display_stain_id]
+        local stain_sprite_direction = stain_sprite_directions[i]
+        shared_stain_sprite:set_sprite_pos(display_stain.sprite_pos[stain_sprite_direction])
+        for i=1, #shaders do
+          shared_stain_sprite:draw_shader(shaders[i], nil, shared_stain_sprite.ARGS.send_to_shader)
+        end
+      end
+    end
+  end,
+  layers = { both = true, card = true },
+  conditions = { facing = "front" },
 }

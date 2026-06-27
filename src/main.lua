@@ -65,6 +65,12 @@ if MOD.DEBUG.enabled then
       MOD.DEBUG.log("found atlas: ", atlas_key)
     end
   end
+
+  for draw_step_key in next, SMODS.DrawSteps do
+    if draw_step_key:find("^exp33") then
+      MOD.DEBUG.log("found draw step: ", draw_step_key)
+    end
+  end
 end
 
 local game_start_run = Game.start_run
